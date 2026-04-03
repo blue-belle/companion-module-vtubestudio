@@ -15,6 +15,24 @@ module.exports = function (self) {
 			callback: async (event) => {
 				console.log('Hello world!', event.options.num)
 			},
+
+
+		},
+		sample_action2: {
+			name: 'Load Model',
+			options: [
+				{
+					id: 'model',
+					type: 'textinput',
+					label: 'Model to Load:',
+
+				},
+			],
+			callback: async (event) => {
+				console.log('Attempting to load model', event.options.model)
+			},
+
+
 		},
 	})
 }

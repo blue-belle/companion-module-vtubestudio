@@ -11,7 +11,8 @@ const fs = require("fs")
 
 // API CLIENT OPTIONS
 function setAuthToken(authenticationToken) {
-	console.log(autenticationToken);
+	console.log(This.autenticationToken);
+	this.instance.config.accessToken = authenticationToken;
 //	fs.writeFileSync("./authToken.txt", authenticationToken, {
 	//	encoding: "utf-8",
 	//});
@@ -28,6 +29,7 @@ const options = {
 	authTokenSetter: setAuthToken,
 	pluginName: "Bitfocus Companion",
 	pluginDeveloper: "blue-belle",
+	//pluginIcon: fs.readFileSync("/icon.txt")
 };
 
 const apiClient = new ApiClient(options);
@@ -46,7 +48,6 @@ class ModuleInstance extends InstanceBase {
 		this.config = config
 
 		this.updateStatus(InstanceStatus.Ok)
-
 		this.updateActions() // export actions
 		this.updateFeedbacks() // export feedbacks
 		this.updateVariableDefinitions() // export variable definitions
@@ -79,6 +80,13 @@ class ModuleInstance extends InstanceBase {
 				label: 'Target Port',
 				width: 4,
 				regex: Regex.PORT,
+			},
+			{
+				type: 'textinput',
+				id: 'authToken',
+				label: 'AuthenticationToken',
+				width: 16,
+//				regex: Regex.PORT,
 			},
 		]
 	}
