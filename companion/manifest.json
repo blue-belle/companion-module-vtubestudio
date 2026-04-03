@@ -21,7 +21,7 @@
 		"entrypoint": "../src/main.js"
 	},
 	"legacyIds": [],
-	"manufacturer": "Your company",
-	"products": ["Your product"],
+	"manufacturer": "DenchiSoft",
+	"products": ["VTube Studio"],
 	"keywords": []
 }
