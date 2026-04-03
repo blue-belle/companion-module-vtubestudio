@@ -3,7 +3,40 @@ const UpgradeScripts = require('./upgrades')
 const UpdateActions = require('./actions')
 const UpdateFeedbacks = require('./feedbacks')
 const UpdateVariableDefinitions = require('./variables')
+const vts = require("vtubestudio");
+const ApiClient = vts.ApiClient;
+const fs = require("fs")
 
+
+
+// API CLIENT OPTIONS
+function setAuthToken(authenticationToken) {
+	console.log(autenticationToken);
+//	fs.writeFileSync("./authToken.txt", authenticationToken, {
+	//	encoding: "utf-8",
+	//});
+
+}
+
+function getAuthToken() {
+	console.log("Trying to retrieve the auth token");
+	//return fs.readFileSync("./authToken.txt", "utf-8");
+}
+
+const options = {
+	authTokenGetter: getAuthToken,
+	authTokenSetter: setAuthToken,
+	pluginName: "Bitfocus Companion",
+	pluginDeveloper: "blue-belle",
+};
+
+const apiClient = new ApiClient(options);
+
+
+
+// BOILERPLATE CODE FROM COMPANION
+//
+//
 class ModuleInstance extends InstanceBase {
 	constructor(internal) {
 		super(internal)
@@ -18,6 +51,9 @@ class ModuleInstance extends InstanceBase {
 		this.updateFeedbacks() // export feedbacks
 		this.updateVariableDefinitions() // export variable definitions
 	}
+
+
+
 	// When module gets deleted
 	async destroy() {
 		this.log('debug', 'destroy')
