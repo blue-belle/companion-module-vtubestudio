@@ -3,7 +3,7 @@
 module.exports = function (self) {
 	self.setActionDefinitions({
 		authenticate_action: {
-			name: 'Get Auth Token',
+			name: 'Print Auth Token',
 			options: [
 				{
 					id: 'authToken',
@@ -14,10 +14,7 @@ module.exports = function (self) {
 			],
 			hasResult: true,
 			callback: async (event) => {
-//				console.log('Authentication token has been requested')
-				// this line wants to set the "authToken" value on the config page to the result of the authenticate functin, which the console does indicate is grabbing the right token. I just don't know the syntax to "send" the information from actions.js to main.js, and vice-versa.'
-				//instance.config.authToken=authenticate()
-//				self.saveConfig(authenticate())
+				console.log('The stored authentication token is: ',self.config.AuthenticationToken)
 			},
 
 
