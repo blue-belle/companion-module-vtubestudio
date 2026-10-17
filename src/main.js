@@ -13,10 +13,6 @@ const UpdateVariableDefinitions = require('./variables')
 //	this.instance.config.accessToken = authenticationToken;
 //}
 
-//function getAuthToken() {
-//	console.log("Trying to retrieve the auth token");
-	//return fs.readFileSync("./authToken.txt", "utf-8");
-//}
 
 //const options = {
 //	authTokenGetter: getAuthToken,
@@ -43,10 +39,21 @@ const UpdateVariableDefinitions = require('./variables')
 		this.updateFeedbacks() // export feedbacks
 		this.updateVariableDefinitions() // export variable definitions
 
-		this.socket.addEventListener('open', event => { // Executes when the connection is successfully established.
+		this.socket.addEventListener('open', () => { // Executes when the connection is successfully established.
 			console.log('WebSocket connection established...');
-			this.config.AuthenticationToken = this.authenticate()
+			if (!this.config.AuthenticationToken.length)  { //skip if token is already set
+				this.authenticate()
+			}
+		})
+
+		this.socket.addEventListener('message', (event) => {
+			const decoded = JSON.parse(event.data)
+			if (decoded?.messageType === 'AuthenticationTokenResponse'){ //if the response type is an authentication token
+			const authToken = decoded.data.authenticationToken
+			console.log('Authentication token is: ', authToken)
+			this.config.AuthenticationToken = authToken
 			this.saveConfig(this.config)
+			}
 		});
 	}
 
@@ -64,16 +71,6 @@ const UpdateVariableDefinitions = require('./variables')
 	 authenticate() {
 		const data =  {"apiName":"VTubeStudioPublicAPI","apiVersion":"1.0","requestID":"SomeID","messageType":"AuthenticationTokenRequest","data":{"pluginName":"Bitfocus Companion","pluginDeveloper":"blue-belle"}}
 		this.socket.send(JSON.stringify(data)) //Send Request
-		this.socket.addEventListener('message', event => {
-			//console.log('Message from server: ', event.data);
-			const data = event.data
-			const decoded = JSON.parse(data)
-			const authToken = decoded.data.authenticationToken
-			console.log('Authentication token is: ' , authToken)
-			//this.config.authToken = authToken
-			//this.saveConfig(authToken)
-			return(authToken)
-		});
 	}
 	// Return config fields for web config
 	getConfigFields() {
