@@ -4,7 +4,7 @@ See [HELP.md](./companion/HELP.md) and [LICENSE](./LICENSE)
 
 # General Approach
 - [X] Authentication Flow. On startup, get a token from VTS and store it in the `config` object. Skip if token is already set
-- [~] Update to companion's API v5, with associated updates to Node and Yarn. 
+- [ ] Update to companion's API v5, with associated updates to Node and Yarn. 
 - [ ] Implement some Actions, starting with [Trigger Hotkey](https://github.com/DenchiSoft/VTubeStudio#requesting-execution-of-hotkeys:~:text=trigger%20hotkeys,-in). Allow user to define which hotkey should be triggered
 - [ ] Implement the [list of available hotkeys](https://github.com/DenchiSoft/VTubeStudio#requesting-list-of-hotkeys-available-in-current-or-other-vts-model) API call as a request that happens on startup (after authentication, somehow). Populate it to the Trigger Hotkey action so the user can select the hotkey from a dropdown list. 
 - [ ] Does this maybe also need to be an action to manually refresh available hotkeys? I don't see why not. Beats restarting the plugin I guess
