@@ -1,14 +1,11 @@
-const { combineRgb } = require('@companion-module/base')
-
-module.exports = async function (self) {
+export function UpdateFeedbacks(self) {
 	self.setFeedbackDefinitions({
-		ChannelState: {
+		sample_feedback: {
 			name: 'Example Feedback',
 			type: 'boolean',
-			label: 'Channel State',
 			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
+				bgcolor: 0xff0000,
+				color: 0x000000,
 			},
 			options: [
 				{
@@ -18,6 +15,7 @@ module.exports = async function (self) {
 					default: 5,
 					min: 0,
 					max: 10,
+					clampValues: true, // If value is outside the min/max, clamp it to the min/max instead of rejecting the input
 				},
 			],
 			callback: (feedback) => {
