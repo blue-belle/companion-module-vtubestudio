@@ -1,20 +1,25 @@
+
 export function UpdateActions(self) {
 	self.setActionDefinitions({
-		sample_action: {
-			name: 'My First Action',
+		getHotkeys: {
+			name: 'Get Hotkeys',
 			options: [
-				{
-					id: 'num',
-					type: 'number',
-					label: 'Test',
-					default: 5,
-					min: 0,
-					max: 100,
-				},
+
 			],
 			callback: async (event) => {
-				console.log('Hello world!', event.options.num)
+				const data = {"apiName":"VTubeStudioPublicAPI","apiVersion":"1.0","requestID":"SomeID","messageType":"HotkeysInCurrentModelRequest","data":{"modelID":"Optional_UniqueIDOfModel","live2DItemFileName":"Optional_Live2DItemFileName"}}
+				self.socket.send(JSON.stringify(data))
 			},
 		},
 	})
+}
+function sendCommand() {
+	const data = {
+		"apiName": "VTubeStudioPublicAPI",
+		"apiVersion": "1.0",
+		"requestID": "SomeID",
+		"messageType": "HotkeysInCurrentModelRequest",
+		"data": { "modelID": "Optional_UniqueIDOfModel", "live2DItemFileName": "Optional_Live2DItemFileName" }
+	}
+	socket.send(JSON.stringify(data))
 }
