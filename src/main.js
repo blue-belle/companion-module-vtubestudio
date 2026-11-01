@@ -41,7 +41,7 @@ const UpdateVariableDefinitions = require('./variables')
 
 		this.socket.addEventListener('open', () => { // Executes when the connection is successfully established.
 			console.log('WebSocket connection established...');
-			if (!this.config.AuthenticationToken.length)  { //skip if token is already set
+			if (!this.config.AuthenticationToken)  { //skip if token is already set
 				this.authenticate()
 			}
 		})
