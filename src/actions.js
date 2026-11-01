@@ -35,7 +35,7 @@ export function UpdateActions(self) {
 					"requestID": "SomeID",
 					"messageType": "HotkeyTriggerRequest",
 					"data": {
-						"hotkeyID": self.hotkey,
+						"hotkeyID": event.options.hotkey,
 					}
 				}
 
